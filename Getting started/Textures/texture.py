@@ -1,4 +1,4 @@
-import os, sys
+import sys
 import OpenGL.GL as gl
 import glfw
 from ShaderProgram import ShaderProgram
