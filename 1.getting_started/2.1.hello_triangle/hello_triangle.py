@@ -109,8 +109,8 @@ def main():
         glfw.swap_buffers(window)
         glfw.poll_events()
 
-    gl.glDeleteVertexArrays(1, VAO)
-    gl.glDeleteBuffers(1, VBO)
+    # gl.glDeleteVertexArrays(1, VAO) 这里有点问题。暂时不知道怎么解决
+    # gl.glDeleteBuffers(1, VBO)
     glfw.terminate()
     return 0
 
