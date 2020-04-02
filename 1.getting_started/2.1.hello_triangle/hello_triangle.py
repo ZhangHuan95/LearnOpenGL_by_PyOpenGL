@@ -108,7 +108,7 @@ def main():
         gl.glDrawArrays(gl.GL_TRIANGLES, 0, 3)
         glfw.swap_buffers(window)
         glfw.poll_events()
-
+    
     gl.glDeleteVertexArrays(1, VAO)
     gl.glDeleteBuffers(1, VBO)
     glfw.terminate()

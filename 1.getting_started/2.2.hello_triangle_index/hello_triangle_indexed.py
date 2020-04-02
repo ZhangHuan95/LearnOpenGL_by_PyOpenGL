@@ -42,7 +42,7 @@ def framebuffer_size_callback(window, width, height):
 
 def processInput(window):
     if glfw.get_key(window, glfw.KEY_ESCAPE) == glfw.PRESS:
-        glfw.window_should_close()
+        glfw.window_should_close(window)
 
     if glfw.get_key(window, glfw.KEY_LEFT) == glfw.PRESS:
         gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_FILL)
