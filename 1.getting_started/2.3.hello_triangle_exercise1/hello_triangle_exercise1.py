@@ -24,6 +24,7 @@ void main()
 }
 """
 
+
 def frame_size_callback(window, width, height):
     gl.glViewport(0, 0, width, height)
 
@@ -33,16 +34,11 @@ def processInput(window):
         glfw.set_window_should_close(window, True)
 
 
-def framebuffer_size_callback(window, width, height):
-    gl.glViewport(0, 0, width, height)
-
-
 def main():
     glfw.init()
     glfw.window_hint(glfw.CONTEXT_VERSION_MAJOR, 3)
     glfw.window_hint(glfw.CONTEXT_VERSION_MINOR, 3)
     glfw.window_hint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
-
     window = glfw.create_window(
         SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", None, None)
 
@@ -84,36 +80,41 @@ def main():
     gl.glDeleteShader(fragmentShader)
 
     vertices = np.array([
-        -0.5, -0.5, 0,  # left
-        0.5, -0.5, 0,  # right
-        0, 0.5, 0  # top
+        #  first triangle
+        -0.9, -0.5, 0,  # left
+        0, -0.5, 0,  # right
+        -0.45, 0.5, 0,  # top
+        # second triangle
+        0, -0.5, 0,  # left
+        0.9, -0.5, 0,  # right
+        0.45, 0.5, 0   # top
     ], dtype=np.float32)
 
     VAO = gl.glGenVertexArrays(1)
     VBO = gl.glGenBuffers(1)
     gl.glBindVertexArray(VAO)
-
     gl.glBindBuffer(gl.GL_ARRAY_BUFFER, VBO)
     gl.glBufferData(gl.GL_ARRAY_BUFFER, sys.getsizeof(
         vertices), vertices, gl.GL_STATIC_DRAW)
 
     gl.glVertexAttribPointer(
-        0, 3, gl.GL_FLOAT, gl.GL_FALSE, 24,  None)
+        0, 3, gl.GL_FLOAT, gl.GL_FALSE, 24, None)
     gl.glEnableVertexAttribArray(0)
     gl.glBindBuffer(gl.GL_ARRAY_BUFFER, 0)
     gl.glBindVertexArray(0)
+    # gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_LINE)
     while not glfw.window_should_close(window):
         processInput(window)
         gl.glClearColor(0.2, 0.3, 0.3, 1.0)
         gl.glClear(gl.GL_COLOR_BUFFER_BIT)
         gl.glUseProgram(shaderProgram)
         gl.glBindVertexArray(VAO)
-        gl.glDrawArrays(gl.GL_TRIANGLES, 0, 3)
+        gl.glDrawArrays(gl.GL_TRIANGLES, 0, 6)
         glfw.swap_buffers(window)
         glfw.poll_events()
 
-    # gl.glDeleteVertexArrays(1, VAO) 这里有点问题。暂时不知道怎么解决
-    # gl.glDeleteBuffers(1, VBO)
+    gl.glDeleteVertexArrays(1,VAO) 
+    gl.glDeleteBuffers(1,VBO)
     glfw.terminate()
     return 0
 
