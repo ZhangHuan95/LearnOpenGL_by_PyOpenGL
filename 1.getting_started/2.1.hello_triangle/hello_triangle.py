@@ -98,7 +98,7 @@ def main():
         vertices), vertices, gl.GL_STATIC_DRAW)
 
     gl.glVertexAttribPointer(
-        0, 3, gl.GL_FLOAT, gl.GL_FALSE, 24,  None)
+        0, 3, gl.GL_FLOAT, gl.GL_FALSE, 12,  None)
     gl.glEnableVertexAttribArray(0)
     gl.glBindBuffer(gl.GL_ARRAY_BUFFER, 0)
     gl.glBindVertexArray(0)
